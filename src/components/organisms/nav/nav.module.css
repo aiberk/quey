@@ -1,0 +1,4 @@
+.sidenav {
+  grid-area: sidenav;
+  background-color: #394263;
+}
