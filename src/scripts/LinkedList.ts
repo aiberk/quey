@@ -208,4 +208,16 @@ export class Queue {
       this.rear = prevNode;
     }
   }
+
+  size(): number {
+    let size = 0;
+    let currentNode = this.front;
+
+    while (currentNode !== null) {
+      size++;
+      currentNode = currentNode.next;
+    }
+
+    return size;
+  }
 }

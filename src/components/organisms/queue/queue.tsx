@@ -7,6 +7,8 @@ import {
 } from "/Users/abrahamiberkleid/Documents/Sandbox/quey/src/scripts/LinkedList";
 import NodeComponent from "../node/node";
 
+const timeInterval = 1000; // 3 seconds
+
 const sampleQueue = [
   {
     imageUrl: "image1.jpg",
@@ -31,6 +33,7 @@ const sampleQueue = [
 const QueueComponent: React.FC = () => {
   const [queue, setQueue] = useState<Queue>(new Queue());
   const [version, setVersion] = useState(0);
+  const [queueState, setQueueState] = useState("stopped");
 
   useEffect(() => {
     let q = new Queue();
@@ -40,6 +43,32 @@ const QueueComponent: React.FC = () => {
     setQueue(q);
   }, []);
 
+  // Auto dequeue function
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (queueState === "running") {
+      interval = setInterval(() => {
+        if (queue.size() > 0) {
+          removeFromQueueWithRerender(queue.front.name);
+        }
+      }, timeInterval);
+    }
+
+    return () => clearInterval(interval);
+  }, [queue, version, queueState]);
+
+  const startQueue = () => {
+    setQueueState("running");
+  };
+
+  const pauseQueue = () => {
+    setQueueState("paused");
+  };
+
+  const stopQueue = () => {
+    setQueueState("stopped");
+  };
   const moveForwardWithRerender = (nodeName: string) => {
     queue.moveForward(nodeName);
     setVersion((prev) => prev + 1);
@@ -75,7 +104,15 @@ const QueueComponent: React.FC = () => {
 
   return (
     <div>
-      <h2>Queue</h2>
+      <div>
+        <h2>Queue</h2>
+        {queueState === "running" ? (
+          <button onClick={stopQueue}>Stop</button>
+        ) : (
+          <button onClick={startQueue}>Start</button>
+        )}
+      </div>
+
       <ul>{renderQueue(queue)}</ul>
     </div>
   );
