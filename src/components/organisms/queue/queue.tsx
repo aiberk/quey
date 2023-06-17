@@ -28,6 +28,18 @@ const sampleQueue = [
     time: 300,
     description: "Description3",
   },
+  {
+    imageUrl: "image3.jpg",
+    name: "Node4",
+    time: 300,
+    description: "Description3",
+  },
+  {
+    imageUrl: "image3.jpg",
+    name: "Node5",
+    time: 300,
+    description: "Description3",
+  },
 ];
 
 const QueueComponent: React.FC = () => {
@@ -46,7 +58,6 @@ const QueueComponent: React.FC = () => {
   // Auto dequeue function
   useEffect(() => {
     let interval: NodeJS.Timeout;
-
     if (queueState === "running") {
       interval = setInterval(() => {
         if (queue.size() > 0) {
