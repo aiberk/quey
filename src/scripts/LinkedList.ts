@@ -39,8 +39,7 @@ export class Queue {
       this.front = newNode;
       this.rear = newNode;
     } else {
-      // this.rear.next = newNode;
-      this.rear!.next = newNode;
+      this.rear.next = newNode;
       this.rear = newNode;
     }
   }
@@ -77,8 +76,7 @@ export class Queue {
       currentNode = currentNode.next;
     }
     currentNode.next = null;
-    // this.rear.next = this.front;
-    this.rear!.next = this.front!;
+    this.rear.next = this.front;
     this.front = this.rear;
     this.rear = currentNode;
   }
@@ -111,8 +109,7 @@ export class Queue {
     if (currentNode === this.front) {
       this.front = nextNode;
     } else {
-      // prevNode.next = nextNode;
-      prevNode!.next = nextNode;
+      prevNode.next = nextNode;
     }
 
     currentNode.next = nextNode.next;
@@ -189,8 +186,7 @@ export class Queue {
       return;
     }
 
-    // let prevNode = this.front;
-    let prevNode: Node | null = this.front;
+    let prevNode = this.front;
     let currentNode = this.front.next;
 
     // Find the node with the given name
