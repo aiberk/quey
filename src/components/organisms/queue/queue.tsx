@@ -1,11 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styles from "./queue.module.css";
-import {
-  Node,
-  Queue,
-} from "/Users/abrahamiberkleid/Documents/Sandbox/quey/src/scripts/LinkedList";
+import { Queue } from "../../../scripts/LinkedList";
 import NodeComponent from "../node/node";
+import Skeleton from "../skeleton";
 
 const timeInterval = 1000; // 3 seconds
 
@@ -117,6 +115,7 @@ const QueueComponent: React.FC = () => {
     <div>
       <div>
         <h2>Queue</h2>
+        <Skeleton />
         {queueState === "running" ? (
           <button onClick={stopQueue}>Stop</button>
         ) : (
