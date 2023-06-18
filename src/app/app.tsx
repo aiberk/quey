@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Logos from "components/atoms/logos";
 import Card from "components/organisms/card";
 import {
@@ -21,19 +22,21 @@ import styles from "./app.module.css";
 import Footer from "components/organisms/footer";
 import Nav from "components/organisms/nav";
 import QueueComponent from "components/organisms/queue";
+import RegistrationForm from "components/organisms/registrationForm";
 
 const App = (): JSX.Element => {
   return (
-    <main className={styles.main}>
-      {/* <Nav /> */}
-      <main className={styles.main2}>
-        <QueueComponent />
+    <Router>
+      <main className={styles.main}>
+        <Nav />
+        <main className={styles.main2}>
+          <Routes>
+            <Route path="/register" element={<RegistrationForm />} />
+            <Route path="/" element={<QueueComponent />} />
+          </Routes>
+        </main>
       </main>
-
-      {/* <header className={styles.header}></header> */}
-      <Nav />
-      {/* <footer className={styles.footer}></footer> */}
-    </main>
+    </Router>
   );
 };
 
